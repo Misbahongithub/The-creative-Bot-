@@ -1,0 +1,24 @@
+{
+  "name": "the-creative-discord-bot",
+  "version": "1.0.0",
+  "description": "A bot to track the most used bot in any server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Misbahongithub/The-creative-Bot-.git"
+  },
+  "author": "Misbah Huda",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Misbahongithub/The-creative-Bot-/issues"
+  },
+  "homepage": "https://github.com/Misbahongithub/The-creative-Bot-#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "mongodb": "^3.6.4"
+  }
+}
