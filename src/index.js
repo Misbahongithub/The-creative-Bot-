@@ -55,7 +55,7 @@ bot.on("message", async function (message) {
 				}
 			);
  	let channel = bot.channels.fetch('832925876923400223')
-	channel.send(`${message.author}:   ${search.count}`)
+	channel.send(`${message.author}:   ${search.count+1}`)
 });
 
 // Log in out bot so that it can do it's work
