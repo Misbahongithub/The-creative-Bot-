@@ -7,7 +7,4 @@ Open Source ♥️.
 
 (C) 2021 Creative Bot contributors
 
-#discord bot 
-
-
-#botdevelopment 
+#discord bot #bot #developers 
