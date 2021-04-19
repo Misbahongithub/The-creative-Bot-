@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 // Use dotenv to get all out secret environment variables
 require("dotenv").config();
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}/test?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}/main?retryWrites=true&w=majority`;
 const { MongoClient } = require("mongodb");
 const Mongo = new MongoClient(uri, { useUnifiedTopology: true });
 
@@ -32,28 +32,21 @@ bot.on("message", async function (message) {
 	// The message did not came from a bot user. So simply ignore it
 	if (!message.author.bot) return;
 	console.log(message.content.toString());
-
-	let search = await Mongo.db("main").collection("data").findOne({
-		_id: message.author.id,
-	});
-
-	if (search === null)
-		await Mongo.db("main").collection("data").insertOne({
-			_id: message.author.id,
-			count: 1,
-		});
-	else
-		await Mongo.db("main")
-			.collection("data")
-			.findOneAndReplace(
-				{
-					_id: message.author.id,
+ 	
+	await Mongo.db()
+		.collection('main')
+		.updateOne(
+			{ _id: msg.author.id },
+			{
+				$inc: {
+					count: 1,
 				},
-				{
-					_id: message.author.id,
-					count: search.count + 1,
-				}
-			);
+			},
+			{
+				upsert: true,
+			}
+		)
+
  	let channel = bot.channels.fetch('832925876923400223')
 	channel.send(`${message.author}:   ${search.count+1}`)
 });
