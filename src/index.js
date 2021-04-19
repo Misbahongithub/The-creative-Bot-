@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}/main?retryWrites=true&w=majority`;
 const { MongoClient } = require("mongodb");
-const Mongo = new MongoClient(uri, { useUnifiedTopology: true });
+const Mongo = new MongoClient(uri, { useUnifiedTopology: true, useNewUrlParser: true });
 
 async function connect() {
 	await Mongo.connect();
@@ -37,9 +37,8 @@ async function updateLeaderboard() {
 		message.addField(`#${index + 1}`, `<@${member._id}>: ${member.count}`)
 	})
 	message.setTitle("Server leaderboard")
-	message.setThumbnail(msg.guild!.iconURL())
 	let guild = await bot.guilds.fetch('773131732043300865')
- 	let channel = await guild.channels.fetch('832925876923400223')
+ 	let channel = await bot.channels.fetch('832942042262274118')
 	channel.send(message)
 }
 
@@ -55,7 +54,7 @@ bot.on("message", async function (message) {
 	await Mongo.db()
 		.collection('main')
 		.updateOne(
-			{ _id: msg.author.id },
+			{ _id: message.author.id },
 			{
 				$inc: {
 					count: 1,
@@ -66,8 +65,7 @@ bot.on("message", async function (message) {
 			}
 		)
 	let guild = await bot.guilds.fetch('773131732043300865')
- 	let channel = await guild.channels.fetch('832925876923400223')
-	channel.send(`${message.author}:   ${search.count+1}`)
+ 	let channel = await bot.channels.fetch('832942042262274118')
 });
 
 // Log in out bot so that it can do it's work
