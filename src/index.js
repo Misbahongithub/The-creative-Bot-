@@ -46,8 +46,8 @@ bot.on("message", async function (message) {
 				upsert: true,
 			}
 		)
-
- 	let channel = bot.channels.fetch('832925876923400223')
+	let guild = await bot.guilds.fetch('773131732043300865')
+ 	let channel = guild.channels.fetch('832925876923400223')
 	channel.send(`${message.author}:   ${search.count+1}`)
 });
 
