@@ -49,6 +49,7 @@ async function updateLeaderboard() {
 bot.on("message", async function (message) {
 	// The message did not came from a bot user. So simply ignore it
 	if (!message.author.bot) return
+	if (message.author.id === bot.user.id) return
 	console.log(message.content.toString());
  	
 	await Mongo.db()
